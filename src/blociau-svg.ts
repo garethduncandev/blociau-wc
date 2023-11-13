@@ -1,5 +1,5 @@
 import { Blociau, type BlociauStyle } from 'blociau';
-import { LitElement, TemplateResult, html } from 'lit';
+import { LitElement, TemplateResult, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { until } from 'lit/directives/until.js';
 
@@ -11,9 +11,12 @@ import { until } from 'lit/directives/until.js';
  */
 @customElement('blociau-svg')
 export class BlociauSVG extends LitElement {
-  /**
-   * Copy for the read the docs hint.
-   */
+  public static styles = css`
+    :host {
+      display: inline-block;
+    }
+  `;
+
   @property({ type: String })
   public id!: string;
 
@@ -21,10 +24,14 @@ export class BlociauSVG extends LitElement {
   public imgSrc!: string;
 
   @property({ type: Number })
-  public codeBlockHeight!: number;
+  public codeBlockHeight: number = 10;
 
   @property({ type: Array })
-  public styles!: BlociauStyle[];
+  public rectStyles: BlociauStyle[] = [
+    { width: 10, color: 'red', borderRadius: 0.1 },
+    { width: 20, color: 'green', borderRadius: 0.1 },
+    { width: 30, color: 'blue', borderRadius: 0.1 },
+  ];
 
   @property({ type: Number })
   public padding: number = 1;
@@ -43,7 +50,11 @@ export class BlociauSVG extends LitElement {
   }
 
   private async createSvg(): Promise<SVGSVGElement> {
-    const blocks = new Blociau(this.codeBlockHeight, this.styles, this.padding);
+    const blocks = new Blociau(
+      this.codeBlockHeight,
+      this.rectStyles,
+      this.padding
+    );
 
     const img = await this.loadImage(this.imgSrc);
     console.log(img.height, img.width);

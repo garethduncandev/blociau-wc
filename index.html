@@ -4,27 +4,52 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/circle.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Lit + TS</title>
-    <link rel="stylesheet" href="./src/index.css" />
+    <title>Blociau Web Component</title>
     <script type="module" src="/src/blociau-svg.ts"></script>
   </head>
   <body>
-    <blociau-svg
-      style="width: 500px; height: 500px"
-      id="example"
-      imgSrc="circle.png"
-      styles='[
-        {"width": 10, "color": "black", "borderRadius": 1},
-        {"width": 10, "color": "blue", "borderRadius": 1},
-        {"width": 20, "color": "green", "borderRadius": 1},
-        {"width": 30, "color": "red", "borderRadius": 1},
-        {"width": 40, "color": "brown", "borderRadius": 1}
-      ]'
-      animation
-      animationDelay="500"
-      codeBlockHeight="20"
-      speed="0.1"
-      padding="5"
-    ></blociau-svg>
+    <div>
+      <blociau-svg
+        style="width: 100px; height: 100px"
+        id="example1"
+        imgSrc="circle.png"
+        rectStyles='[
+          {"width": 10, "color": "black", "borderRadius": 1},
+          {"width": 10, "color": "blue", "borderRadius": 1},
+          {"width": 20, "color": "green", "borderRadius": 1},
+          {"width": 30, "color": "red", "borderRadius": 1},
+          {"width": 40, "color": "brown", "borderRadius": 1}
+        ]'
+        animation
+        animationDelay="500"
+        codeBlockHeight="20"
+        speed="0.1"
+        padding="5"
+      ></blociau-svg>
+
+      <blociau-svg
+        style="width: 100px; height: 100px"
+        id="example2"
+        imgSrc="circle.png"
+        rectStyles='[
+          {"width": 10, "color": "pink", "borderRadius": 1},
+          {"width": 10, "color": "yellow", "borderRadius": 1},
+          {"width": 20, "color": "orange", "borderRadius": 1},
+          {"width": 30, "color": "brown", "borderRadius": 1},
+          {"width": 40, "color": "purple", "borderRadius": 1}
+        ]'
+        animation
+        animationDelay="500"
+        codeBlockHeight="30"
+        speed="0.1"
+        padding="5"
+      ></blociau-svg>
+
+      <blociau-svg
+        style="width: 100px; height: 100px"
+        id="example-default"
+        imgSrc="circle.png"
+      ></blociau-svg>
+    </div>
   </body>
 </html>
