@@ -1,8 +1,12 @@
 {
   "name": "blociau-wc",
-  "private": true,
   "version": "0.0.0-alpha.0",
   "type": "module",
+  "homepage": "https://github.com/garethduncandev/blociau-wc#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garethduncandev/blociau-wc.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -12,17 +16,32 @@
     "lint": "eslint .",
     "lint:write": "eslint . --fix",
     "format": "npm run prettier && npm run lint",
-    "format:write": "npm run prettier:write && npm run lint:write"
+    "format:write": "npm run prettier:write && npm run lint:write",
+    "deploy": "npm publish --access public",
+    "deploy:locally": "npm publish --access public --userconfig ~/.npmrc-garethduncandev"
   },
   "dependencies": {
-    "blociau": "^1.0.9",
-    "lit": "^2.7.6"
+    "blociau": "^1.0.10",
+    "lit": "^3.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "eslint": "^8.51.0",
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
-  }
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.6.3"
+  },
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ]
 }

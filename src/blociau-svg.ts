@@ -1,4 +1,4 @@
-import { Blociau, type BlociauStyle } from 'blociau';
+import { Blociau, RectStyle } from 'blociau';
 import { LitElement, TemplateResult, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { until } from 'lit/directives/until.js';
@@ -27,7 +27,7 @@ export class BlociauSVG extends LitElement {
   public codeBlockHeight: number = 10;
 
   @property({ type: Array })
-  public rectStyles: BlociauStyle[] = [
+  public rectStyles: RectStyle[] = [
     { width: 10, color: 'red', borderRadius: 0.1 },
     { width: 20, color: 'green', borderRadius: 0.1 },
     { width: 30, color: 'blue', borderRadius: 0.1 },

@@ -1,0 +1,34 @@
+name: PR request Blockiau WC
+on:
+  pull_request:
+    branches: ['main']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run format
+      - run: npm run build
+
+      - name: Extract version from package.json
+        id: extract_version
+        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+
+      - name: Check if package.json version is listed in npm registry
+        id: check_npm_version
+        run: |
+          VERSION=${{ steps.extract_version.outputs.VERSION }}
+          if npm view blociau-wc@$VERSION > /dev/null; then
+            echo "Version $VERSION exists in npm registry"
+            echo "::set-output name=version_exists::true"
+            exit 1
+          else
+            echo "Version $VERSION not found in npm registry"
+            echo "::set-output name=version_exists::false"
+          fi
