@@ -19,11 +19,11 @@ jobs:
       - run: npm run build
       # todo - run: npm run test
 
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build Changelog
+      #   id: github_release
+      #   uses: mikepenz/release-changelog-builder-action@v3
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract version from package.json
         id: extract_version
@@ -46,7 +46,7 @@ jobs:
         with:
           tag_name: v${{ steps.extract_version.outputs.VERSION }}
           release_name: v${{ steps.extract_version.outputs.VERSION }}
-          body: ${{steps.github_release.outputs.changelog}}
+          body: v${{ steps.extract_version.outputs.VERSION }}
           draft: false
           prerelease: false
 
