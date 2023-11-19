@@ -5,12 +5,78 @@
     <link rel="icon" type="image/svg+xml" href="/circle.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blociau Web Component</title>
-    <script type="module" src="/src/blociau-svg.ts"></script>
+    <script type="module" src="/src/index.ts"></script>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script>
+      // Get the example-default-rect element
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const exampleDefaultRect = document.getElementById(
+          'example-default-rect'
+        );
+
+        console.log('example-default-rect', exampleDefaultRect);
+
+        // Define a function to increment the width
+        function incrementWidth() {
+          // Get the current width
+          let currentWidth = parseInt(exampleDefaultRect.getAttribute('width'));
+
+          // Increment the width by 100
+          currentWidth += 100;
+
+          // Update the width attribute
+          exampleDefaultRect.setAttribute('width', currentWidth);
+        }
+
+        // Call the incrementWidth function every 1 seconds
+        const intervalId = setInterval(incrementWidth, 1000);
+
+        // Stop the interval after 10 seconds
+        setTimeout(function () {
+          clearInterval(intervalId);
+        }, 8000);
+      });
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        updateWidth();
+      });
+
+      window.addEventListener('resize', function () {
+        updateWidth();
+      });
+
+      function updateWidth() {
+        const windowWidth = window.innerWidth;
+
+        // update example-rect-full-width to be windowWidth
+        const exampleRectFullWidth = document.getElementById(
+          'example-rect-full-width'
+        );
+        exampleRectFullWidth.setAttribute('width', windowWidth);
+      }
+    </script>
   </head>
   <body>
     <div>
-      <blociau-svg
-        style="width: 100px; height: 100px"
+      <blociau-rect
+        id="example-rect-full-width"
+        animate
+        width="0"
+        height="100"
+      ></blociau-rect>
+
+      <br />
+
+      <blociau-img
         id="example1"
         imgSrc="circle.png"
         rectStyles='[
@@ -23,12 +89,13 @@
         animation
         animationDelay="500"
         codeBlockHeight="20"
+        imgWidth="200"
+        imgHeight="200"
         speed="0.1"
         padding="5"
-      ></blociau-svg>
+      ></blociau-img>
 
-      <blociau-svg
-        style="width: 100px; height: 100px"
+      <blociau-img
         id="example2"
         imgSrc="circle.png"
         rectStyles='[
@@ -43,13 +110,18 @@
         codeBlockHeight="30"
         speed="0.1"
         padding="5"
-      ></blociau-svg>
+      ></blociau-img>
 
-      <blociau-svg
-        style="width: 100px; height: 100px"
-        id="example-default"
-        imgSrc="circle.png"
-      ></blociau-svg>
+      <blociau-img id="example-default" imgSrc="circle.png"></blociau-img>
+
+      <br />
+
+      <blociau-rect
+        id="example-default-rect"
+        animate
+        width="100"
+        height="200"
+      ></blociau-rect>
     </div>
   </body>
 </html>

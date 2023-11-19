@@ -1,3 +1,4 @@
-import { BlociauSVG } from './blociau-svg';
+import { BlociauImage } from './blociau-image.js';
+import { BlociauRect } from './blociau-rect.js';
 
-export default BlociauSVG;
+export { BlociauImage, BlociauRect };

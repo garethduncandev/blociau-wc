@@ -1,27 +1,28 @@
 import { Blociau, RectStyle } from 'blociau';
 import { LitElement, TemplateResult, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { until } from 'lit/directives/until.js';
 
 /**
  * Blociau element
- *
- * @slot - This element has a slot
- * @csspart button - The button
  */
-@customElement('blociau-svg')
-export class BlociauSVG extends LitElement {
+@customElement('blociau-rect')
+export class BlociauRect extends LitElement {
   public static styles = css`
     :host {
       display: inline-block;
+      height: var(--result-height);
+      width: var(--result-width);
     }
   `;
 
   @property({ type: String })
   public id!: string;
 
-  @property({ type: String })
-  public imgSrc!: string;
+  @property({ type: Number })
+  public height: number = 100;
+
+  @property({ type: Number })
+  public width: number = 100;
 
   @property({ type: Number })
   public codeBlockHeight: number = 10;
@@ -46,22 +47,26 @@ export class BlociauSVG extends LitElement {
   public speed: number = 0.2;
 
   public render(): TemplateResult<1> {
-    return html`${until(this.createSvg())}`;
+    return html`${this.createSvg()}`;
   }
 
-  private async createSvg(): Promise<SVGSVGElement> {
-    const blocks = new Blociau(
+  private createSvg(): SVGSVGElement {
+    // update host width and height based on image size
+    // this allows us to have a default style that can be overridden by
+    // the consuming app
+    this.style.setProperty('--result-height', `${this.height}px`);
+    this.style.setProperty('--result-width', `${this.width}px`);
+
+    const blociau = new Blociau(
       this.codeBlockHeight,
       this.rectStyles,
       this.padding
     );
 
-    const img = await this.loadImage(this.imgSrc);
-    console.log(img.height, img.width);
-    const svg = blocks.create(this.id, img);
+    const svg = blociau.fromDimensions(this.id, this.width, this.height);
 
     if (this.animation) {
-      const animateCss = blocks.animate(
+      const animateCss = blociau.animate(
         this.id,
         svg,
         this.speed,
@@ -74,19 +79,10 @@ export class BlociauSVG extends LitElement {
 
     return svg;
   }
-
-  private async loadImage(imgSrc: string): Promise<HTMLImageElement> {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = (): void => resolve(img);
-      img.onerror = reject;
-      img.src = imgSrc;
-    });
-  }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blociau-svg': BlociauSVG;
+    'blociau-rect': BlociauRect;
   }
 }
