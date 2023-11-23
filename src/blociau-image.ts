@@ -14,8 +14,11 @@ export class BlociauImage extends LitElement {
   public static styles = css`
     :host {
       display: inline-block;
-      height: var(--result-height);
-      width: var(--result-width);
+    }
+
+    svg {
+      height: 100%;
+      width: 100%;
     }
   `;
 
@@ -69,12 +72,6 @@ export class BlociauImage extends LitElement {
     // overide original image size if requested
     if (this.imgWidth) img.width = this.imgWidth;
     if (this.imgHeight) img.height = this.imgHeight;
-
-    // update host width and height based on image size
-    // this allows us to have a default style that can be overridden by
-    // the consuming app
-    this.style.setProperty('--result-height', `${img.height}px`);
-    this.style.setProperty('--result-width', `${img.width}px`);
 
     const svg = blocks.fromImage(this.id, img);
 

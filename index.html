@@ -66,6 +66,26 @@
     </script>
   </head>
   <body>
+    <blociau-img
+      style="width: 738px; height: 927px; max-width: 100dvw; max-height: 100dvh"
+      id="example-max"
+      imgSrc="wales.png"
+      rectStyles='[
+          {"width": 10, "color": "black", "borderRadius": 1},
+          {"width": 10, "color": "blue", "borderRadius": 1},
+          {"width": 20, "color": "green", "borderRadius": 1},
+          {"width": 30, "color": "red", "borderRadius": 1},
+          {"width": 40, "color": "brown", "borderRadius": 1}
+        ]'
+      animation
+      imgWidth="738"
+      imgHeight="927"
+      animationDelay="500"
+      codeBlockHeight="20"
+      speed="0.05"
+      padding="5"
+    ></blociau-img>
+
     <div>
       <blociau-rect
         id="example-rect-full-width"
@@ -78,7 +98,7 @@
 
       <blociau-img
         id="example1"
-        imgSrc="circle.png"
+        imgSrc="wales.png"
         rectStyles='[
           {"width": 10, "color": "black", "borderRadius": 1},
           {"width": 10, "color": "blue", "borderRadius": 1},
@@ -97,7 +117,7 @@
 
       <blociau-img
         id="example2"
-        imgSrc="circle.png"
+        imgSrc="wales.png"
         rectStyles='[
           {"width": 10, "color": "pink", "borderRadius": 1},
           {"width": 10, "color": "yellow", "borderRadius": 1},
